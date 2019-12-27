@@ -4,6 +4,7 @@ const Post = require('../models/posts');
 
 module.exports = {
     createPost : async (req, res) => {
+        
        try{
         req.body.userId  =  req.user._id;
         const post = new Post(req.body);

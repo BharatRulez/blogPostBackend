@@ -23,14 +23,21 @@ mongoose.connection.on("error", err => {
 app.use(express.static(path.join(__dirname, "src")));
 
 
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:3006'}));
 //middleware
 app.use(morgan("dev"));
 //app.use(myOwnMiddleWare);
+
+
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({secret:'XASDASDA'}));
+app.use(session({secret: 'keyboard cat',
+resave: false,
+saveUninitialized: true,
+cookie: { secure: false }}));
+
 app.use(bodyParser.json());
 app.use(cookieParser());
+
 //app.use(expressValidator());
 var rroute = require('path').join(__dirname, 'src/routes')
 require('fs').readdirSync(rroute).forEach(function(file) {

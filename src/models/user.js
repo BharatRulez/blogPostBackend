@@ -44,6 +44,7 @@ userSchema.pre("save", async function(next) {
 //methods
 userSchema.methods = {
   authenticate: function(password, hashed_password) {
+    console.log(bcrypt.compareSync(password,hashed_password));
     return bcrypt.compareSync(password, hashed_password);
   }
 };
